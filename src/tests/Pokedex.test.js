@@ -18,7 +18,7 @@ describe('Teste do componente Pokedex', () => {
     );
   });
 
-  it('Teste se página contém um heading h2 com o texto Encountered pokémons.', () => {
+  it('Test if page contains an h2 heading with the text Encountered pokemons', () => {
     const heading = screen.getByRole('heading', {
       level: 2,
       name: /Encountered pokémons/i,
@@ -26,14 +26,14 @@ describe('Teste do componente Pokedex', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  it(`Teste se é exibido o próximo Pokémon da lista
-   quando o botão Próximo pokémon é clicado.`, () => {
+  it(`Test if the next Pokemon on the list is displayed
+  when the Next Pokemon button is clicked`, () => {
     let pokeName = screen.getByTestId(pokemonNameTestId);
     expect(pokeName.innerHTML).toEqual(data[0].name);
 
     for (let i = 1; i < data.length; i += 1) {
       const button = screen.getByTestId('next-pokemon');
-      expect(button.innerHTML).toEqual('Próximo pokémon');
+      expect(button.innerHTML).toEqual('Next pokémon');
       userEvent.click(button);
 
       pokeName = screen.getByTestId(pokemonNameTestId);
@@ -41,13 +41,13 @@ describe('Teste do componente Pokedex', () => {
     }
 
     const button = screen.getByTestId('next-pokemon');
-    expect(button.innerHTML).toEqual('Próximo pokémon');
+    expect(button.innerHTML).toEqual('Next pokémon');
     userEvent.click(button);
     pokeName = screen.getByTestId(pokemonNameTestId);
     expect(pokeName.innerHTML).toEqual(data[0].name);
   });
 
-  it('Teste se a Pokédex tem os botões de filtro.', () => {
+  it('Test if the Pokédex has the filter buttons', () => {
     const pokemonTypes = [];
     data.forEach(({ type }) => {
       if (!pokemonTypes.includes(type)) pokemonTypes.push(type);
@@ -68,7 +68,7 @@ describe('Teste do componente Pokedex', () => {
     expect(allFilter.innerHTML).toEqual('All');
   });
 
-  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+  it('Test if the Pokédex contains a button to reset the filter', () => {
     const allFilter = screen.getAllByRole('button')[0];
     expect(allFilter.innerHTML).toEqual('All');
     userEvent.click(allFilter);

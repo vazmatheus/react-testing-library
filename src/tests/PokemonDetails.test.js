@@ -7,14 +7,14 @@ import data from '../data';
 
 const pokemon = data[0];
 
-describe('Teste do componente PokemonDetails', () => {
+describe('PokemonDetails component test', () => {
   beforeEach(() => {
     const { history } = renderWithRouter(<App />);
     history.push(`/pokemons/${pokemon.id}`);
   });
 
-  it(`Teste se as informações detalhadas do
-    Pokémon selecionado são mostradas na tela.`, () => {
+  it(`Test that the detailed information of the
+  Selected Pokémon are shown on the screen`, () => {
     const heading = screen.getByRole('heading', {
       level: 2,
       name: /pikachu details/i,
@@ -34,8 +34,8 @@ describe('Teste do componente PokemonDetails', () => {
     expect(description).toBeInTheDocument();
   });
 
-  it(`Teste se existe na página uma seção com os mapas
-    contendo as localizações do pokémon`, () => {
+  it(`Test if there is a section with maps on the page
+  containing pokemon locations`, () => {
     const heading = screen.getByRole('heading', {
       level: 2,
       name: /game locations of pikachu/i,
@@ -52,8 +52,8 @@ describe('Teste do componente PokemonDetails', () => {
     });
   });
 
-  it(`Teste se o usuário pode favoritar um pokémon
-    através da página de detalhes.`, () => {
+  it(`Test if the user can favorite a pokemon
+  through the details page`, () => {
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).toBeInTheDocument();
     expect(checkbox.checked).toBe(false);

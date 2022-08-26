@@ -10,19 +10,19 @@ const { id, averageWeight: { value, measurementUnit }, name, type, image } = pok
 
 let history;
 
-describe('Teste do componente Pokemon', () => {
+describe('Pokemon component test', () => {
   beforeEach(() => {
     const router = renderWithRouter(<Pokemon pokemon={ pokemon } isFavorite />);
     history = router.history;
   });
-  it('Testa se é renderizado um card com as informações de determinado pokémon.', () => {
-    // acessar os elementos da tela
+  it('Tests if a card with the information of a given pokémon is rendered', () => {
+    // access screen elements
     const pokeName = screen.getByTestId('pokemon-name');
     const pokeType = screen.getByTestId('pokemon-type');
     const pokeWeight = screen.getByTestId('pokemon-weight');
     const pokeImage = screen.getByRole('img', { name: /pikachu sprite/i });
 
-    // fazer os testes
+    // do the tests
     expect(pokeName).toBeInTheDocument();
     expect(pokeType).toBeInTheDocument();
     expect(pokeWeight).toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
@@ -32,20 +32,20 @@ describe('Teste do componente Pokemon', () => {
   });
 
   it(
-    `Teste se o card do Pokémon indicado na Pokédex contém um link
-     de navegação para exibir detalhes deste Pokémon.`, () => {
-      // acessar os elementos da tela
+    `Test if the card of the Pokémon listed in the Pokédex contains a link
+    navigation to view details of this Pokémon`, () => {
+      // access screen elements
       const pokeDetails = screen.getByRole('link', { name: /more details/i });
 
-      // fazer os testes
+      // do the tests
       expect(pokeDetails).toBeInTheDocument();
       expect(pokeDetails).toHaveAttribute('href', `/pokemons/${id}`);
     },
   );
 
-  it(`Teste se ao clicar no link de navegação do Pokémon,
-   é feito o redirecionamento da aplicação para a página de detalhes de Pokémon.`, () => {
-    // acessar os elementos da tela
+  it(`Test that when clicking on the Pokémon navigation link,
+  the application is redirected to the Pokémon details page`, () => {
+    // access screen elements
     const pokeDetails = screen.getByRole('link', { name: /more details/i });
 
     // interagir com os elementos
@@ -54,36 +54,30 @@ describe('Teste do componente Pokemon', () => {
     const pokeName = screen.getByTestId('pokemon-name');
     const pokeType = screen.getByTestId('pokemon-type');
 
-    // fazer os testes
+    // do the tests
     expect(pokeName).toBeInTheDocument();
     expect(pokeName.innerHTML).toEqual(name);
     expect(pokeType.innerHTML).toEqual(type);
   });
 
-  it(`Teste também se a URL exibida no navegador muda para /pokemon/<id>,
-   onde <id> é o id do Pokémon cujos detalhes se deseja ver.`, () => {
-    // acessar os elementos da tela
+  it(`Also test if the URL displayed in the browser changes to /pokemon/<id>,
+  where <id> is the id of the Pokémon whose details you want to see`, () => {
+    // access screen elements
     const pokeDetails = screen.getByRole('link', { name: /more details/i });
 
     // interagir com os elementos
     userEvent.click(pokeDetails);
 
-    // fazer os testes
+    // do the tests
     expect(history.location.pathname).toEqual(`/pokemons/${id}`);
   });
 
-  it('Teste se existe um ícone de estrela nos Pokémons favoritados.', () => {
-    // acessar os elementos da tela
+  it('Test if there is a star icon on favorite Pokemons', () => {
+    // access screen elements
     const pokeImage = screen.getByAltText(`${name} is marked as favorite`);
 
-    // fazer os testes
+    // do the tests
     expect(pokeImage).toHaveAttribute('src', '/star-icon.svg');
     expect(pokeImage).toHaveAttribute('alt', `${name} is marked as favorite`);
   });
 });
-
-// acessar os elementos da tela
-
-// interagir com os elementos
-
-// fazer os testes

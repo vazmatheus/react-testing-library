@@ -5,41 +5,41 @@ import FavoritePokemons from '../components/FavoritePokemons';
 import App from '../App';
 import renderWithRouter from '../helpers/renderWithRouter';
 
-describe('Teste do componente FavoritePokemons', () => {
-  it(`'Testa se é exibido na tela a mensagem No favorite pokemon found,
-  se a pessoa não tiver pokémons favoritos'`, () => {
-    // acessar os elementos da tela
+describe('FavoritePokemons component test', () => {
+  it(`'Tests if the message No favorite pokemon found is displayed on the screen,
+  if the person doesn't have favorite pokemons'`, () => {
+    // access screen elements
     renderWithRouter(<FavoritePokemons />);
     const text = screen.getByText(/no favorite pokemon found/i);
 
-    // fazer os testes
+    // do the tests
     expect(text).toBeInTheDocument();
   });
 
-  it('Testa se é exibido todos os cards de pokémons favoritados.', () => {
-    // acessar os elementos da tela
+  it('Tests if all favorite pokemon cards are displayed', () => {
+    // access screen elements
     renderWithRouter(<App />);
     const details = screen.getByRole('link', { name: 'More details' });
 
-    // interagir com os elementos
+    // interact with the elements
     userEvent.click(details);
 
-    // acessar os elementos da tela
+    // access screen elements
     const favCheckbox = screen.getByRole('checkbox', { name: 'Pokémon favoritado?' });
 
-    // interagir com os elementos
+    // interact with the elements
     userEvent.click(favCheckbox);
 
-    // acessar os elementos da tela
+    // access screen elements
     const linkFavorites = screen.getByRole('link', { name: 'Favorite Pokémons' });
 
-    // interagir com os elementos
+    // interact with the elements
     userEvent.click(linkFavorites);
 
-    // acessar os elementos da tela
+    // access screen elements
     const pokemonName = screen.getByTestId('pokemon-name');
 
-    // fazer os testes
+    // do the tests
     expect(pokemonName).toBeInTheDocument();
   });
 });

@@ -4,79 +4,81 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../helpers/renderWithRouter';
 
-describe('Teste do componente App', () => {
+describe('App component testing', () => {
   beforeEach(() => {
     renderWithRouter(<App />);
   });
-  it('Testa se o topo da aplicação contém um conjunto fixo de links de navegação', () => {
-    // acessar os elementos da tela
+  it(`'Tests if the top of the application 
+  contains a fixed set of navigation links'`, () => {
+    // access screen elements
     const homeLink = screen.getByRole('link', { name: 'Home' });
     const aboutLink = screen.getByRole('link', { name: 'About' });
     const favPokemonsLink = screen.getByRole('link', {
       name: 'Favorite Pokémons',
     });
 
-    // fazer os testes
+    // do the tests
     expect(homeLink).toBeInTheDocument();
     expect(aboutLink).toBeInTheDocument();
     expect(favPokemonsLink).toBeInTheDocument();
   });
 
-  it(`'Testa se a aplicação é redirecionada para a página inicial, 
-  na URL / ao clicar no link Home da barra de navegação.'`, () => {
-    // acessar os elementos da tela
+  it(`'Tests if the application is redirected to the home page,
+  in the URL / by clicking the Home link in the navigation bar'`, () => {
+    // access screen elements
     const homeLink = screen.getByRole('link', { name: 'Home' });
     const heading2 = screen.getByRole('heading', {
       level: 2,
       name: 'Encountered pokémons',
     });
-    // interagir com os elementos
+    // interact with the elements
     userEvent.click(homeLink);
-    // fazer os testes
+    // do the tests
     expect(heading2).toBeInTheDocument();
   });
 
-  it(`'Testa se a aplicação é redirecionada para a página de About,
-  na URL /about, ao clicar no link About da barra de navegação.'`, () => {
-    // acessar os elementos da tela
+  it(`'Tests if the application is redirected to the About page,
+  in the /about URL, by clicking the About link in the navigation bar'`, () => {
+    // access screen elements
     const aboutLink = screen.getByRole('link', { name: 'About' });
-    // interagir com os elementos
+    // interact with the elements
     userEvent.click(aboutLink);
     const heading2 = screen.getByRole('heading', {
       level: 2,
       name: 'About Pokédex',
     });
-    // fazer os testes
+    // do the tests
     expect(heading2).toBeInTheDocument();
   });
 
-  it(`'Testa se a aplicação é redirecionada para a página de Pokémons Favoritados,
-  na URL /favorites, ao clicar no link Favorite Pokémons da barra de navegação.'`, () => {
-    // acessar os elementos da tela
+  it(`'Tests if the application is redirected to the Favorite Pokemons page,
+  in the URL /favorites, by clicking on the Favorite Pokémons link 
+  in the navigation bar'`, () => {
+    // access screen elements
     const favPokemonsLink = screen.getByRole('link', {
       name: 'Favorite Pokémons',
     });
-    // interagir com os elementos
+    // interact with the elements
     userEvent.click(favPokemonsLink);
     const heading2 = screen.getByRole('heading', {
       level: 2,
       name: 'Favorite pokémons',
     });
-    // fazer os testes
+    // do the tests
     expect(heading2).toBeInTheDocument();
   });
 
-  it(`'Testa se a aplicação é redirecionada para a página Not Found
-  ao entrar em uma URL desconhecida.'`, () => {
-    // acessar os elementos da tela
+  it(`'Tests if the application is redirected to the Not Found page
+  when entering an unknown URL'`, () => {
+    // access screen elements
     const { history } = renderWithRouter(<App />);
-    // interagir com os elementos
+    // interact with the elements
     history.push('notFound');
     const heading2 = screen.getByRole('heading', {
       level: 2,
       name: /Page requested not found/i,
     });
-    // fazer os testes
+    // do the tests
     expect(heading2).toBeInTheDocument();
   });
 });

@@ -83,7 +83,7 @@ class Pokedex extends React.Component {
           onClick={() => this.nextPokemon(filteredPokemons.length)}
           disabled={filteredPokemons.length <= 1}
         >
-          Próximo pokémon
+          Next pokémon
         </Button>
       </div>
     );

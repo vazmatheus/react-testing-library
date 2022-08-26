@@ -3,34 +3,34 @@ import { screen } from '@testing-library/react';
 import About from '../components/About';
 import renderWithRouter from '../helpers/renderWithRouter';
 
-describe('Teste do componente About', () => {
+describe('About component test', () => {
   beforeEach(() => {
     renderWithRouter(<About />);
   });
-  it('Testa se a página contém um heading h2 com o texto About Pokédex', () => {
-    // acessar os elementos da tela
+  it('Tests if the page contains an h2 heading with the text About Pokédex', () => {
+    // aaccess screen elements
     const title = screen.getByRole('heading', { name: 'About Pokédex' });
 
-    // fazer os testes
+    // do the tests
     expect(title).toBeInTheDocument();
   });
 
-  it('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-    // acessar os elementos da tela
+  it('Tests if the page contains two paragraphs of Pokédex text', () => {
+    // aaccess screen elements
     const textAbout = screen.getAllByText(/pokémons/i);
 
-    // fazer os testes
+    // do the tests
     expect(textAbout).toHaveLength(2);
     textAbout.forEach((text) => {
       expect(text).toBeInTheDocument();
     });
   });
 
-  it('Testa se a página contém a imagem de uma Pokédex.', () => {
-    // acessar os elementos da tela
+  it('Tests if the page contains an image of a Pokédex', () => {
+    // aaccess screen elements
     const pokeImage = screen.getByAltText('Pokédex');
 
-    // fazer os testes
+    // do the tests
     expect(pokeImage).toBeInTheDocument();
     expect(pokeImage).toHaveAttribute(
       'src',
